@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en-US" charset="utf-8">
+     <head>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.sound.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.js"></script>
+
+
+    <script src="js/script.js" type="text/javascript"></script>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+  <link href="https://fonts.googleapis.com/css?family=Gothic+A1:300,400,500" rel="stylesheet">
+<!---------------------------------------------------------------->
+    <style>
+    .menu button {
+    display: block;
+    background-color: #00000;
+     cursor: pointer;
+       box-shadow:0 1px 4px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14);
+    border: solid 1px black;
+    color: #000000;
+    text-align: center;
+    font-size: 14px;
+    padding: 0px;
+    width: 80px;
+    transition: 0.03s;
+    cursor: pointer;
+    margin: 5px;
+    }
+
+    .menu:hover {
+    background: rgb(170,170,170);
+    }
+
+table, td, th,a {
+    padding: 12px 12px;
+    text-decoration: none;
+    background-color: rgb(50,50,50);
+    text-align: center;
+    opacity: 1;
+    color: rgb(255,255,255);
+    font-family: 'Gothic A1', sans-serif;
+    font-weight: 300;
+    transition: color .2s;
+    letter-spacing: 1px;
+
+}
+table,a{
+    border-collapse: collapse;
+    width: 100%;
+}
+th, td,a {
+    padding: 12px;
+}
+a:hover {
+   color: rgb(200,200,200);
+}
+ img {
+    display: block;
+    background: rgb(0,0,0);
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    margin-top:100px;
+     opacity:1;
+        transition: opacity .2s;
+  }
+       img:hover{
+          opacity: .8;
+
+       }
+
+       p{
+          margin-left: 12.5%;
+          font-size: 20px;
+       }
+
+       div.post{
+             font-family: 'Gothic A1', sans-serif;
+             font-weight: 200;
+          font-size: 20px;
+
+       }
+       div.post h3{
+           margin-top: 1px;
+           margin-left: 12.5%;
+            font-weight: 200;
+          font-size: 20px;
+              margin-bottom: 12px;
+       }
+              div.post em{
+
+            font-weight: 200;
+          font-size: 18px;
+       }
+              div.post h1{
+
+           margin-left: 12.5%;
+            font-weight: 200;
+          font-size: 12px;
+                 margin-bottom: 5px;
+                 color: rgb(40,40,40);
+       }
+
+              div.post img{
+        margin-top:16px;
+       }
+                     div.post p{
+                  margin-left: 12.5%;
+                  font-weight: 200;
+                  font-size: 12px;
+                 margin-bottom: 5px;
+                 color: rgb(40,40,40);
+       }
+       div.post a{
+       opacity: 0;
+       margin-left: 12.5%;
+       margin-bottom: 1px;
+       }
+div.p5 {
+  position: absolute;
+  margin-top: 100px;
+}
+input.slider {
+
+
+}
+
+
+</style>
+<!---------------------------------------------------------------->
+</head>
+<table>
+<tr>
+     <th></th>
+     <th></th>
+     <th></th>
+ <th><a href="http://www.znchlli.com/r/">Home</a></th>
+          <th style="color:rgb(140,140,140);">|</th>
+ <th><a href="http://www.znchlli.com/r/builds">Builds</a></th>
+          <th style="color:rgb(140,140,140);">|</th>
+ <th><a href="http://www.znchlli.com/r/repository/">Repository</a></th>
+          <th style="color:rgb(140,140,140);">|</th>
+ <th><a href="http://www.znchlli.com/r/contact/">Contact</a></th>
+     <th></th>
+     <th></th>
+     <th></th>
+</tr>
+</table>
+<!---------------------------------------------------------------->
+     <p><br /></p>
+     <!---------------------------------------------------------------->
+
+
+     <body>
+       <input type="range" min="90" max="100" value="100" class="slider" id="fricSlider">Friction</input>
+       <input type="range" min="0" max=".02" value=".01" step=".001" class="slider" id="gravSlider">Gravity</input>
+       <input type="range" min="0" max="30" value="0" class="slider" id="rSlider">Radius</input>
+       <input type="range" min="1" max="100" value="50" class="slider" id="bounceSlider">Bounce</input>
+       <input type="range" min="1" max="100" value="100" class="slider" id="rigiditySlider">Rigidity</input>
+       <input type="range" min="1" max="3" step=".1" value="1" class="slider" id="massSlider">massSlider</input>
+       <input type="range" min="0.005" max=".3" value="0.02" step="0.003" class="slider" id="grabSensitivitySlider">Grab Sensitivity</input> <br />
+       <input type="range" min="1" max="255" value="100" class="slider" id="strokes" onchange="mlog(this)">stroke</input>
+     <input type="range" min="1" max="20" value="10" class="slider"  id="tsize"onchange="mlog(this)">tsize</input>
+       <input type="range" min="1" max="20" value="10" class="slider"  id="offset"onchange="mlog(this)">offset</input>
+     <input type="range" min="1" max="255" value="100" class="slider"  id="fills"onchange="mlog(this)">fill</input>
+
+<div id="importElement" style="display: none">
+<textarea id ="importedText"></textarea>
+</div>
+     <div id="sketch-holder">
+
+     </div>
+     </head>
+     <br />
+     <div>
+
+
+
+
+     <br />
+     <p></p>
+     </div>
+
+     </body>
+     <div id="blobhider" style="display: none">
+     <textarea id ="blub">_p 225675 4096 200 false 361.10240984230273 623.4162129085364 361.88477731675937 623.0454009060463 483 172.8000030517578 360.3122097518527 623.8742411184712 false 1 10 1 11100 1 false 0
+_p 260026 0.5 200 false 382.044595924729 593.6388723412514 382.98451011104424 593.3894569634057 518 162.8000030517578 381.08470914950186 593.9648554448144 false 1 10 1 11100 1 false 0
+_p 305700 0.5 200 false 401.01999510488594 575.7429563000287 402.05450253151116 575.5971519451591 552 168.8000030517578 399.9597804393686 575.9581177765897 false 1 10 1 11100 1 false 0
+_p 359349 0.5 200 false 427.6849621161799 565.7747319681885 428.7717546516923 565.7732684633695 569 173.8000030517578 426.57222140998476 565.8359415636844 false 1 10 1 11100 1 false 0
+_p 149687 64 200 false 453.1532532574757 567.0558067882758 454.2323480530325 567.1915808964648 577 189.8000030517578 452.05279981824776 566.9721990531559 false 1 10 1 11100 1 false 0
+_p 498109 512 200 false 475.83670499862683 574.4380382389023 476.8757225899803 574.6958464353011 594 203.8000030517578 474.78272312300356 574.2267124685291 false 1 10 1 11100 1 false 0
+_p 122622 1024 200 false 499.1770328074621 588.9966000623867 500.13704018597133 589.3800787285294 596 222.8000030517578 498.2106793667247 588.654206499548 false 1 10 1 11100 1 false 0
+_p 496835 65536 200 false 517.8515870985194 607.3228168750632 518.7122163796307 607.8068376507246 604 242.8000030517578 516.9934605913509 606.8760194782843 false 1 10 1 11100 1 false 0
+_p 70634 128 200 false 519.4945212922704 635.3703932870588 520.2028184551893 635.8617378221558 592 260.8000030517578 518.7996195858509 634.9193101135526 false 1 10 1 11100 1 false 0
+_p 442831 0.5 200 false 490.9156565536304 653.5338459169764 491.5259388457755 653.8670885525945 573 271.8000030517578 490.3239004916394 653.254248872683 false 1 10 1 11100 1 false 0
+_p 382332 0.5 200 false 464.88997056237923 664.2927893091563 465.4425253723799 664.4813651346785 550 260.8000030517578 464.3581548357263 664.1681670388698 false 1 10 1 11100 1 false 0
+_p 74624 1 200 false 437.75477117505176 672.075835465834 438.26651493890364 672.0412865454593 522 256.8000030517578 437.26482314197443 672.2760925146066 false 1 10 1 11100 1 false 0
+_p 268083 8 200 false 407.15087964295054 672.3270312181527 407.6591779276382 672.1124264219875 496 239.8000030517578 406.6632229839388 672.6627728936016 false 1 10 1 11100 1 false 0
+_p 160853 256 200 false 385.86787317084236 665.1118302137213 386.4168233896116 664.8785969833283 476 220.8000030517578 385.335128647816 665.4290272779493 false 1 10 1 11100 1 false 0
+_p 203589 1048576 200 false 358.11444463007234 649.2574672439423 358.7511058392768 648.8676351832294 467 194.8000030517578 357.486106429381 649.7413639038311 false 1 10 1 11100 1 false 0
+_l 260026 225675
+_l 305700 225675
+_l 305700 260026
+_l 359349 225675
+_l 359349 260026
+_l 359349 305700
+_l 149687 225675
+_l 149687 260026
+_l 149687 305700
+_l 149687 359349
+_l 498109 225675
+_l 498109 260026
+_l 498109 305700
+_l 498109 359349
+_l 498109 149687
+_l 122622 225675
+_l 122622 260026
+_l 122622 305700
+_l 122622 359349
+_l 122622 149687
+_l 122622 498109
+_l 496835 225675
+_l 496835 260026
+_l 496835 305700
+_l 496835 359349
+_l 496835 149687
+_l 496835 498109
+_l 496835 122622
+_l 70634 225675
+_l 70634 260026
+_l 70634 305700
+_l 70634 359349
+_l 70634 149687
+_l 70634 498109
+_l 70634 122622
+_l 70634 496835
+_l 442831 225675
+_l 442831 260026
+_l 442831 305700
+_l 442831 359349
+_l 442831 149687
+_l 442831 498109
+_l 442831 122622
+_l 442831 496835
+_l 442831 70634
+_l 382332 225675
+_l 382332 260026
+_l 382332 305700
+_l 382332 359349
+_l 382332 149687
+_l 382332 498109
+_l 382332 122622
+_l 382332 496835
+_l 382332 70634
+_l 382332 442831
+_l 74624 225675
+_l 74624 260026
+_l 74624 305700
+_l 74624 359349
+_l 74624 149687
+_l 74624 498109
+_l 74624 122622
+_l 74624 496835
+_l 74624 70634
+_l 74624 442831
+_l 74624 382332
+_l 268083 225675
+_l 268083 260026
+_l 268083 305700
+_l 268083 359349
+_l 268083 149687
+_l 268083 498109
+_l 268083 122622
+_l 268083 496835
+_l 268083 70634
+_l 268083 442831
+_l 268083 382332
+_l 268083 74624
+_l 160853 225675
+_l 160853 260026
+_l 160853 305700
+_l 160853 359349
+_l 160853 149687
+_l 160853 498109
+_l 160853 122622
+_l 160853 496835
+_l 160853 70634
+_l 160853 442831
+_l 160853 382332
+_l 160853 74624
+_l 160853 268083
+_l 203589 225675
+_l 203589 260026
+_l 203589 305700
+_l 203589 359349
+_l 203589 149687
+_l 203589 498109
+_l 203589 122622
+_l 203589 496835
+_l 203589 70634
+_l 203589 442831
+_l 203589 382332
+_l 203589 74624
+_l 203589 268083
+_l 203589 160853</textarea>
+     </div>
+
+     </html>
