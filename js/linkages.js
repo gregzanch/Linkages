@@ -46,7 +46,6 @@ var points = [],
     var main = ['Start', 'Define Body', 'Save Model', 'Import', 'Show Snap', 'Undo-Link'];
     var presets = ['Truss', 'Blob'];
 function preload() {
- mySound = loadSound("hit.mp3");
 }
 function setup() {
    width = windowWidth - 30;
